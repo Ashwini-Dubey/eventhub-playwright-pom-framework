@@ -14,13 +14,13 @@ export default defineConfig({
   // Run independent tests in parallel
   fullyParallel: true,
 
-  // Fail if test.only is accidentally committed in CI
+  // Prevent accidental test.only in CI
   forbidOnly: !!process.env.CI,
 
   // Retry failed tests in CI
   retries: process.env.CI ? 1 : 0,
 
-  // Number of parallel workers
+  // Configure parallel workers
   workers: process.env.CI ? 2 : undefined,
 
   // Test execution timeout
@@ -41,28 +41,40 @@ export default defineConfig({
         open: "never",
       },
     ],
+    [
+      "allure-playwright",
+      {
+        resultsDir: "allure-results",
+      },
+    ],
   ],
 
-  // Shared settings for all tests
+  // Shared settings for all browser projects
   use: {
     baseURL: environment.baseURL,
-
-    // Capture trace when a test fails on retry
     trace: "on-first-retry",
-
-    // Capture screenshot only when a test fails
     screenshot: "only-on-failure",
-
-    // Record video only when a test fails
     video: "retain-on-failure",
   },
 
-  // Browser configuration
+  // Cross-browser execution
   projects: [
     {
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
+      },
+    },
+    {
+      name: "firefox",
+      use: {
+        ...devices["Desktop Firefox"],
+      },
+    },
+    {
+      name: "webkit",
+      use: {
+        ...devices["Desktop Safari"],
       },
     },
   ],
