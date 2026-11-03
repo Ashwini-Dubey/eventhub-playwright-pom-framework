@@ -1,0 +1,42 @@
+
+# Dependencies
+node_modules/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Playwright test results
+test-results/
+playwright-report/
+blob-report/
+
+# Allure reports
+allure-results/
+allure-report/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Screenshots and videos
+screenshots/
+videos/
+*.webm
+
+# Debugging
+.playwright/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.swp
