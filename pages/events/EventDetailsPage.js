@@ -1,3 +1,5 @@
+import { expect } from "@playwright/test";
+
 class EventDetailsPage {
   constructor(
     page,
@@ -28,7 +30,13 @@ class EventDetailsPage {
       name: "Confirm Booking",
     });
     this.bookingConfirmationSuccess = page.getByText("Booking Confirmed! 🎉");
-    
+    this.bookingRefDetail = page.locator(".booking-ref");
+    this.viewMyBookingsButton = page.getByRole("button", {
+      name: "View My Bookings",
+    });
+    this.browseMoreEventsButton = page.getByRole("button", {
+      name: "Browse More Events",
+    });
   }
 
   async getEventDetails() {
@@ -83,6 +91,22 @@ class EventDetailsPage {
 
   async clickConfirmBooking() {
     await this.confirmBookingButton.click();
+  }
+
+  async checkBookingConfirmation() {
+    await expect(this.bookingConfirmationSuccess).toBeVisible();
+  }
+
+  async getBookingRef() {
+    return await this.bookingRefDetail.textContent();
+  }
+
+  async clickViewMyBookings() {
+    await this.viewMyBookingsButton.click();
+  }
+
+  async clickBrowseMoreEvents() {
+    await this.browseMoreEventsButton.click();
   }
 
   async eventBooking(bookingName, bookingEmail, bookingPhoneNumber) {
