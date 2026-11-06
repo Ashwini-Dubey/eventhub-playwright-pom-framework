@@ -22,6 +22,10 @@ class LoginPage {
     await this.enterPassword(password);
     await this.clickSigninButton();
   }
+
+  async navigateToLoginPage() {
+    await this.page.goto("/");
+  }
 }
 
 export { LoginPage };
