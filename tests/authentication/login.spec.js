@@ -7,7 +7,7 @@ test("Valid User Login", async ({ loginPage, dashboardPage }) => {
   await expect(dashboardPage.browseEventsLink).toBeVisible();
 });
 
-test("Invalid User Login", async ({ loginPage, dashboardPage }) => {
+test("Invalid User Login", async ({ loginPage }) => {
   await loginPage.navigateToLoginPage();
   await loginPage.login(
     userData.invalidUser.email,

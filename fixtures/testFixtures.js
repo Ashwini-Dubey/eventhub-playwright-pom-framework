@@ -7,6 +7,7 @@ import { DashboardPage } from "../pages/dashboard/DashboardPage.js";
 import { CreateEventPage } from "../pages/events/CreateEventPage.js";
 import { EventDetailsPage } from "../pages/events/EventDetailsPage.js";
 import { EventsPage } from "../pages/events/EventsPage.js";
+import eventData from "../test-data/events.json" with { type: "json" };
 
 const test = base.extend({
   loginPage: async ({ page }, use) => {
@@ -35,7 +36,17 @@ const test = base.extend({
     await use(createEventPage);
   },
   eventDetailsPage: async ({ page }, use) => {
-    const eventDetailsPage = new EventDetailsPage(page);
+    const event = eventData.validEvent;
+
+    const eventDetailsPage = new EventDetailsPage(
+      page,
+      event.eventName,
+      event.eventCategory,
+      event.eventDescription,
+      event.eventVenue,
+      event.eventCity,
+      event.eventPrice,
+    );
     await use(eventDetailsPage);
   },
   eventsPage: async ({ page }, use) => {

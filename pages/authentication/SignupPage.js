@@ -31,10 +31,6 @@ class SignupPage {
     await this.enterConfirmPassword(password);
     await this.clickCreateAccountButton();
   }
-
-  async navigateToSignupPage() {
-    await this.page.goto("/register");
-  }
 }
 
 export { SignupPage };
