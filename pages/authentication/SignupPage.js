@@ -7,6 +7,10 @@ class SignupPage {
     this.createAccountButton = page.getByRole("button", {
       name: "Create Account",
     });
+    this.emailError = page.getByText("Enter a valid email");
+    this.passwordError = page.getByText("Password does not meet the requirements below");
+    this.confirmPasswordError = page.getByText("Passwords do not match");
+    this.alreadyRegisteredEmailError = page.getByText("Email already registered");
   }
 
   async navigateToSignupPage() {

@@ -1,14 +1,13 @@
 {
-  "validUser": {
+  "validUserLogin": {
     "email": "testuser1792517543162@test.com",
     "password": "Password@123"
   },
-  "invalidUser": {
+  "invalidUserLogin": {
     "email": "testuser1792517543162@test.com",
     "password": "WrongPassword123"
   },
-  "newUser": {
-    "email": "testuser998800@test.com",
+  "newUserSignUp": {
     "password": "Password@123"
   }
 }
