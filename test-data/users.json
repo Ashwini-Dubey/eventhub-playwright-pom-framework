@@ -4,11 +4,11 @@
     "password": "Password@123"
   },
   "invalidUser": {
-    "email": "invalid@example.com",
+    "email": "testuser1792517543162@test.com",
     "password": "WrongPassword123"
   },
   "newUser": {
-    "email": "",
-    "password": ""
+    "email": "testuser998800@test.com",
+    "password": "Password@123"
   }
 }

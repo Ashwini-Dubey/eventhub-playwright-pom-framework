@@ -1,3 +1,5 @@
+import { expect } from "@playwright/test";
+
 class LoginPage {
   constructor(page) {
     this.page = page;
@@ -6,6 +8,7 @@ class LoginPage {
     this.signinButton = page.getByRole("button", {
       name: "Sign In",
     });
+    this.loginErrorMessage = page.getByText("Invalid email or password");
   }
 
   async enterEmail(email) {
@@ -25,6 +28,10 @@ class LoginPage {
 
   async navigateToLoginPage() {
     await this.page.goto("/");
+  }
+
+  async extractLoginErrorMessage() {
+    return await this.loginErrorMessage.textContent();
   }
 }
 
