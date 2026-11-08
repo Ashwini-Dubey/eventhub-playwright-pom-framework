@@ -8,6 +8,7 @@ import { CreateEventPage } from "../pages/events/CreateEventPage.js";
 import { EventDetailsPage } from "../pages/events/EventDetailsPage.js";
 import { EventsPage } from "../pages/events/EventsPage.js";
 import eventData from "../test-data/events.json" with { type: "json" };
+import userData from "../test-data/users.json" with { type: "json" };
 
 const test = base.extend({
   loginPage: async ({ page }, use) => {
@@ -52,6 +53,17 @@ const test = base.extend({
   eventsPage: async ({ page }, use) => {
     const eventsPage = new EventsPage(page);
     await use(eventsPage);
+  },
+
+  // Fixture for User Authentication
+  authenticatedUser: async ({ loginPage, dashboardPage }, use) => {
+    await loginPage.navigateToLoginPage();
+    await loginPage.login(
+      userData.validUserLogin.email,
+      userData.validUserLogin.password,
+    );
+    await expect(dashboardPage.browseEventsLink).toBeVisible();
+    await use();
   },
 });
 
