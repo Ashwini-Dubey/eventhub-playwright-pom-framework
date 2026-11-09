@@ -19,8 +19,8 @@ test("Event Search - Search by Event City", async ({
   eventsPage,
 }) => {
   await dashboardPage.clickBrowseEvents();
-  await eventsPage.searchEventsVenue(userData.filterEvent.eventCity);
+  await eventsPage.searchEventsVenue(userData.filterEvent.eventVenue);
   await expect(eventsPage.eventCard.first()).toContainText(
-    userData.filterEvent.eventCity,
+    userData.filterEvent.eventVenue,
   );
 });
