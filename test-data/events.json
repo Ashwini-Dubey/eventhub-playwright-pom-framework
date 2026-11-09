@@ -1,10 +1,10 @@
 {
   "validEvent": {
     "eventName": "Playwright Automation Workshop",
-    "eventCategory": "Technology",
+    "eventCategory": "Workshop",
     "eventDescription": "A hands-on workshop covering Playwright automation with JavaScript.",
     "eventVenue": "Convention Centre",
-    "eventCity": "Bangalore",
+    "eventCity": "Chandigarh",
     "eventPrice": "1500",
     "eventSeats": "100",
     "eventDateTime": "2026-12-15T11:00"
@@ -18,5 +18,11 @@
     "eventPrice": "",
     "eventSeats": "",
     "eventDateTime": ""
+  },
+  "filterEvent": {
+    "eventCity": "Hyderabad",
+    "eventCategory": "Workshop",
+    "eventName": "Test",
+    "eventVenue" : "Chandigarh"
   }
 }

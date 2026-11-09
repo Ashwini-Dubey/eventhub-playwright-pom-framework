@@ -1,13 +1,12 @@
+
 class EventsPage {
   constructor(page) {
     this.page = page;
     this.searchEventsVenueField = page.getByPlaceholder(
       "Search events, venues…",
     );
-    this.eventCategoryDropdown = page.getByRole("combobox", {
-      name: "All Categories",
-    });
-    this.eventCityDropdown = page.getByRole("combobox", { name: "All Cities" });
+    this.eventCategoryDropdown = page.locator("select").nth(0);
+    this.eventCityDropdown = page.locator("select").nth(1);
     this.clearFiltersButton = page.getByRole("button", {
       name: "Clear filters",
     });
@@ -15,6 +14,7 @@ class EventsPage {
       name: "Add New Event",
     });
     this.bookNowLink = page.getByRole("link", { name: "Book Now" });
+    this.eventCard = page.getByTestId("event-card");
   }
 
   async searchEventsVenue(eventName) {
@@ -29,7 +29,7 @@ class EventsPage {
     await this.eventCityDropdown.selectOption(eventCity);
   }
 
-  async clearFilters() {
+  async clickClearFilters() {
     await this.clearFiltersButton.click();
   }
 
