@@ -18,6 +18,7 @@ class BookingListingPage {
 
     this.bookingCancelPromptDeclineButton = page.getByRole("button", {
       name: "Cancel",
+      exact: true,
     });
 
     this.bookingCancelPromptApprovalButton = page.getByRole("button", {
@@ -25,7 +26,7 @@ class BookingListingPage {
     });
 
     this.bookingCancelPromptCloseButton = page.getByRole("button", {
-      name: "X",
+      name: "Close",
     });
 
     this.bookingCancellationSuccessMessage = page.getByText(
