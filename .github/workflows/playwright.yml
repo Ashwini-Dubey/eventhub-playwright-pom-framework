@@ -1,6 +1,5 @@
 name: Playwright Tests - POM Framework
 
-# When to be executed:
 on:
   push:
     branches: [main, master, dev]
@@ -10,7 +9,7 @@ on:
 
   workflow_dispatch:
 
-# What to be done:
+
 jobs:
   # Regular Playwright UI Tests
   test:

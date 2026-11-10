@@ -7,6 +7,7 @@ import { DashboardPage } from "../pages/dashboard/DashboardPage.js";
 import { CreateEventPage } from "../pages/events/CreateEventPage.js";
 import { EventDetailsPage } from "../pages/events/EventDetailsPage.js";
 import { EventsPage } from "../pages/events/EventsPage.js";
+import { HeadersComponents } from "../components/Header.js";
 import eventData from "../test-data/events.json" with { type: "json" };
 import userData from "../test-data/users.json" with { type: "json" };
 
@@ -38,7 +39,6 @@ const test = base.extend({
   },
   eventDetailsPage: async ({ page }, use) => {
     const event = eventData.validEvent;
-
     const eventDetailsPage = new EventDetailsPage(
       page,
       event.eventName,
@@ -53,6 +53,11 @@ const test = base.extend({
   eventsPage: async ({ page }, use) => {
     const eventsPage = new EventsPage(page);
     await use(eventsPage);
+  },
+
+  headersComponents: async ({ page }, use) => {
+    const headersComponents = new HeadersComponents(page);
+    await use(headersComponents);
   },
 
   // Fixture for User Authentication

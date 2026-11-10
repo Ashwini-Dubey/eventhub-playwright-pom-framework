@@ -3,7 +3,6 @@ import { expect } from "@playwright/test";
 class EventDetailsPage {
   constructor(
     page,
-    eventName,
     eventCategory,
     eventDescription,
     eventVenue,
@@ -11,14 +10,37 @@ class EventDetailsPage {
     eventPrice,
   ) {
     this.page = page;
-    this.eventNameDetail = page.getByText(eventName);
-    this.eventCategoryDetail = page.getByText(eventCategory);
-    this.eventDescriptionDetail = page.getByText(eventDescription);
-    this.eventDateDetail = page.getByText("Date");
-    this.eventTimeDetail = page.getByText("Time");
-    this.eventVenueDetail = page.getByText(eventVenue);
-    this.eventCityDetail = page.getByText(eventCity);
-    this.eventPriceDetail = page.getByText(eventPrice);
+    this.eventNameDetail = page.locator("h1");
+    this.eventCategoryDetail = page.locator("div").locator(".text-blue-700");
+    this.eventDescriptionDetail = page
+      .getByRole("heading", { name: "About this event" })
+      .locator("..")
+      .locator("p");
+    this.eventDateDetail = page
+      .getByText("Date")
+      .locator("..")
+      .locator("p")
+      .nth(1);
+    this.eventTimeDetail = page
+      .getByText("Time")
+      .locator("..")
+      .locator("p")
+      .nth(1);
+    this.eventVenueDetail = page
+      .getByText("Venue")
+      .locator("..")
+      .locator("p")
+      .nth(1);
+    this.eventCityDetail = page
+      .getByText("City")
+      .locator("..")
+      .locator("p")
+      .nth(1);
+    this.eventPriceDetail = page
+      .getByText("Price")
+      .locator("..")
+      .locator("p")
+      .nth(1);
     this.eventSeatAvailableDetail = page.locator("div p span");
     this.eventTicketCountIncrement = page.getByRole("button", { name: "+" });
     this.eventTicketCountDecrement = page.getByRole("button", { name: "-" });
