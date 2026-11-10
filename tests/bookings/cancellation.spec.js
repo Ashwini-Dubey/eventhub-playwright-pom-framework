@@ -8,5 +8,5 @@ test("Booking Listing : Booking Cancellation", async ({
 }) => {
   await headersComponents.clickMyBookingsNavigation();
   await expect(page).toHaveURL(/\/bookings$/);
-  await bookingListingPage.cancelBooking;
+  await bookingListingPage.cancelBooking();
 });
