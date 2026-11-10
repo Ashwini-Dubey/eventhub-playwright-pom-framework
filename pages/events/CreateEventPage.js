@@ -12,6 +12,13 @@ class CreateEventPage {
     this.eventPriceField = page.getByLabel("Price ($)");
     this.eventSeatsField = page.getByLabel("Total Seats");
     this.addEventButton = page.getByRole("button", { name: "+ Add Event" });
+    this.eventNameFieldError = page.getByText("Title is required");
+    this.eventCityFieldError = page.getByText("City is required");
+    this.eventVenueFieldError = page.getByText("Venue is required");
+    this.eventDateTimeFieldError = page.getByText("Event date is required");
+    this.eventPriceFieldError = page.getByText("Enter a valid price (≥ 0)");
+    this.eventSeatsFieldError = page.getByText("Must have at least 1 seat");
+    this.eventCreateSuccessMessage = page.getByText("Event Created!");
   }
 
   async enterEventName(eventName) {

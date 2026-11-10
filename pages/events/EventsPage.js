@@ -15,10 +15,15 @@ class EventsPage {
     });
     this.bookNowLink = page.getByRole("link", { name: "Book Now" });
     this.eventCard = page.getByTestId("event-card");
+
   }
 
-  async searchEventsVenue(eventName) {
-    await this.searchEventsVenueField.fill(eventName);
+  async searchEventByVenue(eventVenue) {
+    await this.searchEventsVenueField.fill(eventVenue);
+  }
+
+  async searchEventByName(eventName) {
+    await this.searchEventsVenueField.fill(eventName)
   }
 
   async filterEventWithCategory(eventCategory) {
@@ -40,6 +45,8 @@ class EventsPage {
   async clickBookNowLink() {
     await this.bookNowLink.first().click();
   }
+
+
 }
 
 export { EventsPage };
