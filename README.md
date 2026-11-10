@@ -1,163 +1,182 @@
 # EventHub Playwright POM Framework
 
-A hands-on **UI test automation framework built with Playwright, JavaScript (ES Modules), and the Page Object Model (POM)**.
+A UI test automation framework for the [EventHub application](https://eventhub.rahulshettyacademy.com), built with **Playwright Test, JavaScript (ES Modules), and the Page Object Model (POM)**.
 
-The [EventHub application](https://eventhub.rahulshettyacademy.com) is used as the application under test (AUT). The framework is being developed incrementally, with an emphasis on practical implementation, maintainability, and reusable page objects.
+The project is developed incrementally with a focus on readable tests, reusable page objects, maintainable fixtures, cross-browser execution, and CI reporting.
 
 ## Project Overview
 
 | Area | Details |
 |---|---|
-| Automation | Playwright Test |
+| Application under test | EventHub |
+| Automation tool | Playwright Test |
 | Language | JavaScript (ES Modules) |
 | Design pattern | Page Object Model (POM) |
-| Application under test | EventHub |
-| Current scope | UI automation |
-| Browsers configured | Chromium, Firefox, WebKit |
-| Reporting | Playwright HTML, Allure |
-| Environment configuration | QA and Staging |
+| Browsers | Chromium, Firefox, WebKit |
+| Test organization | Authentication, Dashboard, Events, Bookings |
 | Test data | JSON files |
+| Shared setup | Custom Playwright fixtures |
+| Reporting | Playwright HTML, Allure |
+| CI | GitHub Actions |
+| Environments | QA, Staging |
 
-> **Scope note:** This repository currently focuses on UI automation. API automation is not part of the current implementation.
+**Scope:** This repository currently covers UI automation using POM. API automation and BDD/Gherkin are outside the scope of this project.
 
-## Current Implementation Status
+## Current Test Coverage
 
-### Completed
+The test suite is organized around the main EventHub user journeys:
 
-- [x] Project structure and Playwright setup
-- [x] JavaScript ES Module configuration
-- [x] QA and Staging environment configuration selected through `TEST_ENV`
-- [x] Chromium, Firefox, and WebKit projects configured
-- [x] Playwright HTML and Allure reporters configured
-- [x] Screenshot, video, and trace collection settings configured
-- [x] Authentication Page Objects: `LoginPage` and `SignupPage`
-- [x] Dashboard Page Object
-- [x] Event Page Objects: `EventsPage`, `CreateEventPage`, and `EventDetailsPage`
-- [x] Booking Page Objects: `BookingListingPage` and `BookingDetailsPage`
-- [x] Custom Playwright fixtures for the implemented Page Objects
-- [x] JSON test data files for users and events
-- [x] Login test scenarios for valid credentials, invalid credentials, and a newly registered user
-- [x] Login test execution completed successfully
+| Area | Scenarios represented in the test suite |
+|---|---|
+| Authentication | Valid and invalid login; successful signup; signup field validation and already-registered email validation |
+| Dashboard | Dashboard navigation and visible page elements |
+| Event listing | Event listing, search, and filtering |
+| Event management | Event creation and event details validation |
+| Bookings | Single-ticket and multiple-ticket booking, booking history/details, and booking cancellation |
 
-### In Progress
-
-- [ ] Expand automated test coverage beyond login
-- [ ] Implement and execute signup, dashboard, event, and booking scenarios
-- [ ] Validate and refine Page Object locators through test execution
-- [ ] Add reusable utilities and date/data-generation helpers
-- [ ] Add shared UI component abstractions when genuine reuse is identified
-- [ ] Complete booking workflow coverage, including booking details and cancellation
-
-### Planned
-
-- [ ] Add environment configuration validation and complete the `.env.example` template
-- [ ] Add GitHub Actions CI workflow
-- [ ] Improve reporting and execution diagnostics as test coverage grows
-
-The checklist reflects the current repository state; folders or placeholder files are not treated as completed implementations.
+The scenarios above describe the current test organization. Individual assertions and coverage may continue to evolve as the framework is refined.
 
 ## Project Structure
 
 ```text
-EventHub_Playwright_Framework/
-├── pages/
-│   ├── authentication/
-│   │   ├── LoginPage.js
-│   │   └── SignupPage.js
-│   ├── dashboard/
-│   │   └── DashboardPage.js
-│   ├── events/
-│   │   ├── EventsPage.js
-│   │   ├── CreateEventPage.js
-│   │   └── EventDetailsPage.js
-│   └── bookings/
-│       ├── BookingListingPage.js
-│       └── BookingDetailsPage.js
-├── components/                 # Reserved for reusable UI components
-├── fixtures/
-│   └── testFixtures.js
-├── tests/
-│   ├── authentication/
-│   │   ├── login.spec.js
-│   │   └── signup.spec.js
-│   ├── dashboard/
-│   ├── events/
-│   ├── bookings/
-│   └── regression/
-├── test-data/
-│   ├── users.json
-│   ├── events.json
-│   └── bookings.json
-├── utils/                      # Utility implementations planned
+.
+├── .github/
+│   └── workflows/
+│       └── playwright.yml
+├── components/
+│   ├── Header.js
+│   ├── Modal.js
+│   ├── NavigationMenu.js
+│   └── SearchBar.js
 ├── config/
 │   ├── environment.js
 │   └── environments/
 │       ├── qa.js
 │       └── staging.js
+├── fixtures/
+│   └── testFixtures.js
 ├── global-setup/
+│   └── globalSetup.js
+├── pages/
+│   ├── authentication/
+│   │   ├── LoginPage.js
+│   │   └── SignupPage.js
+│   ├── bookings/
+│   │   ├── BookingDetailsPage.js
+│   │   └── BookingListingPage.js
+│   ├── dashboard/
+│   │   └── DashboardPage.js
+│   └── events/
+│       ├── CreateEventPage.js
+│       ├── EventDetailsPage.js
+│       └── EventsPage.js
+├── test-data/
+│   ├── bookings.json
+│   ├── events.json
+│   └── users.json
+├── tests/
+│   ├── authentication/
+│   │   ├── login.spec.js
+│   │   └── signup.spec.js
+│   ├── bookings/
+│   │   ├── booking-history.spec.js
+│   │   ├── booking.spec.js
+│   │   └── cancellation.spec.js
+│   ├── dashboard/
+│   │   └── dashboard.spec.js
+│   └── events/
+│       ├── event-listing.spec.js
+│       ├── event-management.spec.js
+│       └── event-search.spec.js
+├── utils/
+│   └── dataGenerator.js
 ├── playwright.config.js
 ├── package.json
 ├── package-lock.json
-├── .env.example
-├── .gitignore
 └── README.md
 ```
 
 ## Framework Design
 
-The project follows a straightforward POM structure:
+The framework uses a straightforward POM approach:
 
-- **Tests** contain test scenarios and business-level assertions.
-- **Page Objects** encapsulate page locators and page-level actions.
-- **Fixtures** create and provide Page Object instances to tests.
-- **Test data** is maintained separately in JSON files.
-- **Configuration** selects the target environment and supplies the application base URL.
+- **Tests (`tests/`):** Define user journeys and business-level expectations.
+- **Page Objects (`pages/`):** Keep page-specific locators and actions together.
+- **Reusable components (`components/`):** Encapsulate shared UI elements used across pages.
+- **Fixtures (`fixtures/testFixtures.js`):** Extend Playwright's test object and provide Page Object instances. The `authenticatedUser` fixture performs the login setup for tests that require an authenticated session.
+- **Test data (`test-data/`):** Store reusable event, booking, and user test data in JSON files.
+- **Utilities (`utils/`):** Hold reusable helper functions such as unique test-data generation.
+- **Configuration (`config/` and `playwright.config.js`):** Select the target environment and configure browser projects, timeouts, retries, tracing, screenshots, videos, and reporters.
 
-For example, tests import the extended `test` and `expect` from `fixtures/testFixtures.js`. The fixtures create the requested Page Objects, so tests do not need to instantiate them manually.
+Tests import `test` and `expect` from the custom fixture module:
 
-## Setup
+```js
+import { test, expect } from "../../fixtures/testFixtures.js";
+```
+
+## Getting Started
 
 ### Prerequisites
 
-- Node.js
+- Node.js 22 (the version used by the GitHub Actions workflow)
 - npm
 
 ### Install dependencies
 
+Clone the repository, switch to the `dev` branch if needed, and install the locked dependencies:
+
 ```bash
-npm install
+git clone https://github.com/Ashwini-Dubey/eventhub-playwright-pom-framework.git
+cd eventhub-playwright-pom-framework
+git checkout dev
+npm ci
+```
+
+Install the Playwright browsers:
+
+```bash
 npx playwright install
 ```
 
-### Configure the environment
+On Linux machines that need Playwright's system packages, install the browser dependencies as well:
 
-Create a local `.env` file in the project root. The `.env` file is excluded from version control.
+```bash
+npx playwright install-deps
+```
 
-Set the environment and the corresponding application URLs:
+### Select the target environment
+
+The environment manager reads `TEST_ENV` from the process environment or a local `.env` file. If it is not set, the framework defaults to `qa`.
+
+Create a local `.env` file in the project root if you want to select the environment without setting the variable in every command:
 
 ```env
 TEST_ENV=qa
-QA_BASE_URL=https://eventhub.rahulshettyacademy.com
-STAGING_BASE_URL=
 ```
 
-Use `TEST_ENV=qa` or `TEST_ENV=staging` to select the target environment. Provide the appropriate URL for the environment you intend to run.
+Available values are:
+
+- `qa`
+- `staging`
+
+The application URLs are currently defined in:
+
+- `config/environments/qa.js`
+- `config/environments/staging.js`
+
+Update the relevant configuration file when the URL for an environment changes. The QA and Staging configuration files currently point to the same EventHub URL; set the Staging URL to the appropriate endpoint when one is available.
+
+The local `.env` file is ignored by Git. Do not commit passwords, access tokens, or other real credentials. The current tests read user test data from `test-data/users.json`; use only disposable, non-sensitive test-account data in tracked files. Store any real credentials in environment variables or your CI secret store.
 
 ## Running Tests
 
-Run all discovered tests:
+Run the complete test suite across all configured browser projects:
 
 ```bash
 npx playwright test
 ```
 
-Run the login tests in Chromium:
-
-```bash
-npx playwright test tests/authentication/login.spec.js --project=chromium
-```
-
-Run tests in a specific browser:
+Run the suite in one browser:
 
 ```bash
 npx playwright test --project=chromium
@@ -165,27 +184,91 @@ npx playwright test --project=firefox
 npx playwright test --project=webkit
 ```
 
-## Reports
+Run an individual spec:
 
-Open the Playwright HTML report:
+```bash
+npx playwright test tests/authentication/login.spec.js
+npx playwright test tests/bookings/booking.spec.js
+```
+
+Run tests with the browser UI visible:
+
+```bash
+npx playwright test --headed
+```
+
+Run a test in Playwright's debug mode:
+
+```bash
+npx playwright test --debug
+```
+
+Select Staging for a single run:
+
+```bash
+TEST_ENV=staging npx playwright test
+```
+
+On Windows PowerShell, set the variable before running the command:
+
+```powershell
+$env:TEST_ENV="staging"
+npx playwright test
+```
+
+## Reports and Debugging
+
+### Playwright HTML report
+
+The HTML report is generated in `playwright-report/`:
 
 ```bash
 npx playwright show-report
 ```
 
-Generate and open the Allure report:
+### Allure report
+
+After a test run, generate and open the Allure report:
 
 ```bash
 npx allure generate allure-results --clean -o allure-report
 npx allure open allure-report
 ```
 
-## Development Approach
+The Playwright configuration also collects:
 
-This is an actively developed learning project. New Page Objects and test scenarios are added incrementally. A Page Object is considered implemented when its functionality is added to the code; test coverage and runtime validation are tracked separately.
+- **Trace:** on the first retry
+- **Screenshots:** only for failed tests
+- **Video:** retained for failed tests
 
-The immediate focus is to build out and execute the UI scenarios for authentication, events, and bookings before adding broader framework enhancements and CI integration.
+These artifacts help investigate failures locally and in CI.
 
----
+## Continuous Integration
 
-**Project Status:** POM foundation and login automation implemented; broader UI test coverage is in progress.
+GitHub Actions is configured in `.github/workflows/playwright.yml`.
+
+The workflow runs on:
+
+- Pushes to `main`, `master`, or `dev`
+- Pull requests targeting `main`, `master`, or `dev`
+- Manual execution through `workflow_dispatch`
+
+The workflow uses Node.js 22, installs dependencies with `npm ci`, installs Playwright browsers and Linux dependencies, and executes the tests across the configured browser projects.
+
+The workflow uploads the following artifacts even when the test step fails:
+
+- `playwright-report/`
+- `test-results/`
+- `allure-results/`
+
+The artifact is named `playwright-test-reports` and is retained for 30 days. Download it from the relevant GitHub Actions run to inspect the reports and failure evidence.
+
+## Development Notes
+
+- Keep test scenarios focused on user-visible behavior and meaningful assertions.
+- Prefer accessible Playwright locators such as roles, labels, and placeholders where practical.
+- Avoid fixed sleeps; wait for an expected UI state or condition.
+- Keep page-specific interactions in Page Objects and business-level assertions in the tests.
+- Add abstractions when they provide genuine reuse rather than introducing layers prematurely.
+
+This is an actively evolving learning project. The goal is to keep the framework practical and maintainable while building confidence with Playwright and real-world UI automation patterns.
