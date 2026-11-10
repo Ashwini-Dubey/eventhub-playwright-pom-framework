@@ -1,14 +1,7 @@
 import { expect } from "@playwright/test";
 
 class EventDetailsPage {
-  constructor(
-    page,
-    eventCategory,
-    eventDescription,
-    eventVenue,
-    eventCity,
-    eventPrice,
-  ) {
+  constructor(page) {
     this.page = page;
     this.eventNameDetail = page.locator("h1");
     this.eventCategoryDetail = page.locator("div").locator(".text-blue-700");
@@ -135,8 +128,6 @@ class EventDetailsPage {
     await this.enterBookingFullName(bookingName);
     await this.enterBookingEmail(bookingEmail);
     await this.enterBookingPhoneNumber(bookingPhoneNumber);
-    await this.incrementTicketCount();
-    await this.decrementTicketCount();
     await this.clickConfirmBooking();
   }
 }

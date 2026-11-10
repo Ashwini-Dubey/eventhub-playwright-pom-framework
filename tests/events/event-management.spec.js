@@ -44,7 +44,7 @@ test("Valid Event Creation & Event Details Validation", async ({
   );
 });
 
-test.skip("Invalid Event Creation - Submission without data", async ({
+test("Invalid Event Creation - Submission without data", async ({
   authenticatedUser,
   dashboardPage,
   eventsPage,

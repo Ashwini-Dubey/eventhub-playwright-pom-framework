@@ -34,11 +34,11 @@ class BookingListingPage {
   }
 
   async clickViewBookingDetails() {
-    await this.viewBookingDetailsButton.click();
+    await this.viewBookingDetailsButton.first().click();
   }
 
   async clickCancelBooking() {
-    await this.cancelBookingButton.click();
+    await this.cancelBookingButton.first().click();
   }
 
   async clickClearAllBookings() {
