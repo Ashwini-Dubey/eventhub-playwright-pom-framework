@@ -5,9 +5,14 @@ on:
   push:
     branches: [main, master, dev]
 
+  pull_request:
+    branches: [main, master, dev]
+
+  workflow_dispatch:
+
 # What to be done:
 jobs:
-  # Regular Playwright UI/API Tests
+  # Regular Playwright UI Tests
   test:
     name: Regular Playwright Tests
     timeout-minutes: 60
@@ -20,7 +25,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -34,12 +39,13 @@ jobs:
         env:
           CI: true
 
-      - name: Upload Playwright report
+      - name: Upload Playwright and Allure Reports
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report
+          name: playwright-test-reports
           path: |
             playwright-report/
             test-results/
+            allure-results/
           retention-days: 30
