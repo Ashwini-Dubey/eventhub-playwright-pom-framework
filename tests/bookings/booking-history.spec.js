@@ -1,4 +1,6 @@
 import { test, expect } from "../../fixtures/testFixtures.js";
+import eventData from "../../test-data/events.json" with { type: "json" };
+import bookingData from "../../test-data/bookings.json" with { type: "json" };
 
 test("Booking Listing : Check & Validate Booking Details", async ({
   authenticatedUser,
@@ -9,16 +11,19 @@ test("Booking Listing : Check & Validate Booking Details", async ({
 }) => {
   await headersComponents.clickMyBookingsNavigation();
   await expect(page).toHaveURL(/\/bookings$/);
-  console.log(
-    "Booking Ref.: ",
-    await bookingListingPage.bookingRefDetail.first().textContent(),
-  );
-  console.log(
-    "Event Name: ",
-    await bookingListingPage.eventNameDetail.first().textContent(),
-  );
+  const bookingRefListing =
+    await bookingListingPage.bookingRefListing.textContent();
+  const eventNameListing =
+    await bookingListingPage.eventNameDetail.textContent();
   await bookingListingPage.viewBookingDetailsButton.first().click();
   await expect(page).toHaveURL(/\/bookings\/\d+$/);
+  const bookingRefDetail =
+    await bookingDetailsPage.bookingRefDetail.textContent();
+  const eventNameDetail =
+    await bookingDetailsPage.bookingEventName.textContent();
+  await expect(bookingRefListing).toBe(bookingRefDetail);
+  await expect(eventNameListing).toBe(eventNameDetail);
+  await expect(bookingDetailsPage.bookingStatus).toHaveText("confirmed");
   console.log(
     "Booking Details: ",
     await bookingDetailsPage.getBookingDetails(),
@@ -40,4 +45,13 @@ test("Booking Listing : Check & Validate Booking Details", async ({
     "Refund Message: ",
     await bookingDetailsPage.extractRefundEligibilityMessage(),
   );
+
+  await expect(bookingDetailsPage.customerName).toHaveText(
+    bookingData.validEventBooking.bookingName,
+  );
+  await expect(bookingDetailsPage.customerPhone).toHaveText(
+    bookingData.validEventBooking.bookingPhoneNumber,
+  );
+
+  
 });

@@ -12,9 +12,9 @@ class BookingListingPage {
     this.clearAllBookingsButton = page.getByRole("button", {
       name: "Clear all bookings",
     });
-    this.bookingRefDetail = page.locator(".booking-ref");
+    this.bookingRefListing = page.locator(".booking-ref").first();
 
-    this.eventNameDetail = page.locator("div div h3");
+    this.eventNameDetail = page.locator("div h3").first();
 
     this.bookingCancelPromptDeclineButton = page.getByRole("button", {
       name: "Cancel",

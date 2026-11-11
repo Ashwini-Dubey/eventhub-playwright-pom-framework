@@ -5,7 +5,7 @@ class BookingDetailsPage {
     this.page = page;
 
     //Event Details
-    this.bookingRefDetail = page.locator("div span").first();
+    this.bookingRefDetail = page.locator("span.text-indigo-600");
     this.bookingEventName = page.locator("div h1");
     this.bookingStatus = page.locator("span.text-emerald-700");
     this.bookingEventCategory = page
