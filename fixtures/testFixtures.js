@@ -8,7 +8,6 @@ import { CreateEventPage } from "../pages/events/CreateEventPage.js";
 import { EventDetailsPage } from "../pages/events/EventDetailsPage.js";
 import { EventsPage } from "../pages/events/EventsPage.js";
 import { HeadersComponents } from "../components/Header.js";
-import eventData from "../test-data/events.json" with { type: "json" };
 import userData from "../test-data/users.json" with { type: "json" };
 
 const test = base.extend({
