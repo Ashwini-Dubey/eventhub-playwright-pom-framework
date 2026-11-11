@@ -38,16 +38,7 @@ const test = base.extend({
     await use(createEventPage);
   },
   eventDetailsPage: async ({ page }, use) => {
-    const event = eventData.validEvent;
-    const eventDetailsPage = new EventDetailsPage(
-      page,
-      event.eventName,
-      event.eventCategory,
-      event.eventDescription,
-      event.eventVenue,
-      event.eventCity,
-      event.eventPrice,
-    );
+    const eventDetailsPage = new EventDetailsPage(page);
     await use(eventDetailsPage);
   },
   eventsPage: async ({ page }, use) => {
