@@ -54,6 +54,7 @@ test("Valid Event booking with multiple ticket & Navigation Controls", async ({
   await eventDetailsPage.incrementTicketCount();
   await eventDetailsPage.incrementTicketCount();
   await eventDetailsPage.incrementTicketCount();
+  expect(await eventDetailsPage.extractBookingTicketCount()).toBe("4");
   await eventDetailsPage.clickConfirmBooking();
   await eventDetailsPage.checkBookingConfirmation();
   await expect(eventDetailsPage.viewMyBookingsButton).toBeVisible();
