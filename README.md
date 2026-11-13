@@ -6,19 +6,18 @@ The project is developed incrementally with a focus on readable tests, reusable 
 
 ## Project Overview
 
-| Area | Details |
-|---|---|
-| Application under test | EventHub |
-| Automation tool | Playwright Test |
-| Language | JavaScript (ES Modules) |
-| Design pattern | Page Object Model (POM) |
-| Browsers | Chromium, Firefox, WebKit |
-| Test organization | Authentication, Dashboard, Events, Bookings |
-| Test data | JSON files |
-| Shared setup | Custom Playwright fixtures |
-| Reporting | Playwright HTML, Allure |
-| CI | GitHub Actions |
-| Environments | QA, Staging |
+| Area                   | Details                                     |
+| ---------------------- | ------------------------------------------- |
+| Application under test | EventHub                                    |
+| Automation tool        | Playwright Test                             |
+| Language               | JavaScript (ES Modules)                     |
+| Design pattern         | Page Object Model (POM)                     |
+| Browsers               | Chromium, Firefox, WebKit                   |
+| Test organization      | Authentication, Dashboard, Events, Bookings |
+| Test data              | JSON files                                  |
+| Shared setup           | Custom Playwright fixtures                  |
+| Reporting              | Playwright HTML, Allure                     |
+| CI                     | GitHub Actions                              |
 
 **Scope:** This repository currently covers UI automation using POM. API automation and BDD/Gherkin are outside the scope of this project.
 
@@ -26,13 +25,13 @@ The project is developed incrementally with a focus on readable tests, reusable 
 
 The test suite is organized around the main EventHub user journeys:
 
-| Area | Scenarios represented in the test suite |
-|---|---|
-| Authentication | Valid and invalid login; successful signup; signup field validation and already-registered email validation |
-| Dashboard | Dashboard navigation and visible page elements |
-| Event listing | Event listing, search, and filtering |
-| Event management | Event creation and event details validation |
-| Bookings | Single-ticket and multiple-ticket booking, booking history/details, and booking cancellation |
+| Area             | Scenarios represented in the test suite                                                                     |
+| ---------------- | ----------------------------------------------------------------------------------------------------------- |
+| Authentication   | Valid and invalid login; successful signup; signup field validation and already-registered email validation |
+| Dashboard        | Dashboard navigation and visible page elements                                                              |
+| Event listing    | Event listing, search, and filtering                                                                        |
+| Event management | Event creation and event details validation                                                                 |
+| Bookings         | Single-ticket and multiple-ticket booking, booking history/details, and booking cancellation                |
 
 The scenarios above describe the current test organization. Individual assertions and coverage may continue to evolve as the framework is refined.
 
